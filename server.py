@@ -1,13 +1,18 @@
 from flask import Flask
 from flask import request
 from flask import jsonify
-app = Flask(__name__)
+# app = Flask(__name__)
 
 from gensim import similarities
 from gensim.models import ldamodel
 import gensim.corpora as corpora
 import pandas as pd
 import json
+
+from flask_cors import CORS, cross_origin
+app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 lda_model = ldamodel.LdaModel.load('ldamodel')
 index = similarities.MatrixSimilarity.load('index')
